@@ -17,15 +17,18 @@ use App\Http\Controllers\TaskController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
 Route::get('/Home', function () {
     return view('Home');
 });
-Route::get('/form', [TaskController::class, 'create'])->name('tasks.create');
-Route::post('/form', [TaskController::class, 'store'])->name('tasks.store');
+Route::get('/', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('/', [TaskController::class, 'store'])->name('tasks.store');
+
+Route::get('/index', [TaskController::class, 'index'])->name('tasks.index');
+
 
 
 
