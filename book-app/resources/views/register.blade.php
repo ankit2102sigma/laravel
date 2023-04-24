@@ -1,50 +1,70 @@
 @extends('layout.app')
 
+@section('content')
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Sign Up
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
 
-<form method="POST" action="{{ route('register') }}">
-    @csrf
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" required autofocus>
+                                @if ($errors->has('name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
 
-    <div class="form-group row">
-        <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
-        <div class="col-md-6">
-            <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" required autofocus>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" required>
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" required>
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password_confirmation">Confirm Password</label>
+                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control{{ $errors->has('password') ? 'is-invalid' : '' }}" required>
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group mb-0">
+                                <button type="submit" class="btn btn-primary w-100  ">Register</button>
+                            </div>
+                        </form>
+                        <div class="mt-3">
+                            <p>If you are already signed in, <a href="{{ route('login') }}">login</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="form-group row">
-        <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
-        <div class="col-md-6">
-            <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control" required>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-        <div class="col-md-6">
-            <input type="password" name="password" id="password" class="form-control" required>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
-        <div class="col-md-6">
-            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
-        </div>
-    </div>
-
-    <div class="form-group row mb-0">
-        <div class="col-md-6 offset-md-4">
-            <button type="submit" class="btn btn-primary">Register</button>
-        </div>
-    </div>
-
-    @if ($errors->any())
-        <div class="alert alert-danger mt-3">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-</form>
+@endsection
+@if(session('fail'))
+    <div class="alert alert-danger">{{ session('fail') }}</div>
+@endif

@@ -17,23 +17,22 @@ use App\Http\Controllers\BookController;
 |
 */
 
-Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
-//Route::post('/register', [AuthController::class, 'register']);
-//
+Route::get('/', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-//Route::post('/login', [AuthController::class, 'login']);
-//
-//Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/', [AuthController::class, 'register']);
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::group(['middleware'=>['AuthCheck']], function (){
     Route::get('/form', function () {
         return view('form');
     });
-//    Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/', [AuthController::class, 'showRegistrationForm'])->name('register');
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/', [AuthController::class, 'register']);
 
-//    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
 
 
@@ -50,5 +49,9 @@ Route::group(['middleware'=>['AuthCheck']], function (){
     Route::put('/books/{book}', [BookController::class, 'update'])->name('books.update');
 
     Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
+
+
+
+
 });
 

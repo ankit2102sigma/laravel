@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 use App\Models\Book;
 
 
@@ -13,11 +16,6 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-//    public function index()
-//    {
-//        $books = Book::all();
-//        return view('books.index', compact('books'));
-//    }
 
     public function index(Request $request)
     {
@@ -30,7 +28,7 @@ class BookController extends Controller
                     ->orWhere('Publication_Date', 'like', '%' . $search . '%');
             }
 
-        })->paginate(2);
+        })->paginate(5);
 
 
 
@@ -47,7 +45,7 @@ class BookController extends Controller
     {
         $request->validate([
             'title' => 'required|max:20',
-            'author' => 'required|max:20',
+            'author' => 'required|max:20|regex:/^[a-zA-Z ]+$/',
             'description' => 'required|max:50',
             'Publication_Date' => 'before:today|required',
 
@@ -62,14 +60,19 @@ class BookController extends Controller
         ]);
         $book->save();
 
-        return redirect('/books')->with('success', 'Book has been added');
+        return redirect('books')->with('success', 'Book has been added');
     }
 
-    public function show($id)
+    public function show(int $id)
     {
-        $book = Book::find($id);
+        try {
+            $book = Book::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        }
         return view('books.show', compact('book'));
     }
+
 
     public function edit($id)
     {
@@ -81,8 +84,8 @@ class BookController extends Controller
     {
         $request->validate([
             'title' => 'required|max:20',
-            'author' => 'required|max:20',
-            'description' => 'required|max:20',
+            'author' => 'required|max:20|regex:/^[a-zA-Z ]+$/',
+            'description' => 'required|max:50',
             'Publication_Date' => 'before:today|required',
 
         ]);
@@ -94,14 +97,14 @@ class BookController extends Controller
         $book-> Publication_Date = $request->get('Publication_Date');
         $book->save();
 
-        return redirect('/books')->with('success', 'Book has been updated');
+        return redirect('books')->with('success', 'Book has been updated');
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $book = Book::find($id);
         $book->delete();
 
-        return redirect('/books')->with('success', 'Book has been deleted');
+        return redirect('books')->with('success', 'Book has been deleted');
     }
 }

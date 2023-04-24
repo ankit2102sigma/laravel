@@ -17,8 +17,8 @@ class AuthController extends Controller
     {
         // Validate the user input
         $request->validate([
-            'name' => 'required|string|max:5',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name' => 'required|string|max:15|regex:/^[a-zA-Z ]+$/',
+            'email' => 'required|string|email|max:35|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -62,8 +62,9 @@ class AuthController extends Controller
 
     public function logout()
     {
+        session()->forget('loggedInUser');
         Auth::logout();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

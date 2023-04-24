@@ -226,6 +226,7 @@
       <path value="$PROJECT_DIR$/first-app/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/first-app/vendor/voku/portable-ascii" />
       <path value="$PROJECT_DIR$/first-app/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/book-app/vendor/laravel/ui" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

@@ -6,6 +6,11 @@
       <sourceFolder url="file://$MODULE_DIR$/first-app/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/first-app/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/first-app/tests" isTestSource="true" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/book-app/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/book-app/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/book-app/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/book-app/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/book-app/tests" isTestSource="true" packagePrefix="Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/first-app/vendor/asm89/stack-cors" />
       <excludeFolder url="file://$MODULE_DIR$/first-app/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/first-app/vendor/composer" />
@@ -113,6 +118,7 @@
       <excludeFolder url="file://$MODULE_DIR$/first-app/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/first-app/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/first-app/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/book-app/vendor/laravel/ui" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
