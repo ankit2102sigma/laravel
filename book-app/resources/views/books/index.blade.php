@@ -24,11 +24,11 @@
                 <a href="{{ route('books.create') }}" class="btn btn-primary">Add Book</a>
             </div>
         </div>
-        @if ($books->isEmpty())
+        @if (isset($search) && $books->isEmpty())
             <div class="alert alert-info" role="alert">
                 No results found for "{{ $search }}". Please try a different search term.
             </div>
-        @else
+    @else
             <table class="table overflow-wrap">
                 <thead>
                 <tr>
@@ -63,6 +63,9 @@
                     {{ $books->links('pagination::bootstrap-4') }}
                 </div>
             </div>
+        @endif
+        @if ($books->isEmpty())
+            <p>No books added.</p>
         @endif
     </div>
 @endsection

@@ -28,7 +28,7 @@ class BookController extends Controller
                     ->orWhere('Publication_Date', 'like', '%' . $search . '%');
             }
 
-        })->paginate(5);
+        })->paginate(2);
 
 
 
